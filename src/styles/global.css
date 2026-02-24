@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&family=Noto+Serif:wght@400;700&display=swap');
+
+:root {
+  --color-gold: #D4A843;
+  --color-gold-light: #E8C96A;
+  --color-teal: #1B4D5C;
+  --color-teal-dark: #0F2F3A;
+  --color-cream: #FDF6EC;
+  --color-blush: #D4917A;
+  --color-white: #FFFFFF;
+  --color-text: #2C2C2C;
+  --color-text-light: #5A5A5A;
+
+  --font-heading: 'Noto Serif', Georgia, serif;
+  --font-body: 'Noto Sans', system-ui, sans-serif;
+
+  --max-width: 900px;
+  --section-padding: 5rem 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-cream);
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-teal-dark);
+  line-height: 1.3;
+}
+
+a {
+  color: var(--color-teal);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-padding);
+}
+
+.section-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-teal-dark);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-gold);
+  margin: 0.75rem auto 0;
+  border-radius: 2px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --section-padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
