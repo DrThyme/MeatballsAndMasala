@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Venue from '../../components/Venue.astro';
+import Schedule from '../../components/Schedule.astro';
+import Rsvp from '../../components/Rsvp.astro';
+
+const lang = 'sv';
+---
+
+<BaseLayout lang={lang}>
+  <Hero lang={lang} />
+  <Venue lang={lang} />
+  <Schedule lang={lang} />
+  <Rsvp lang={lang} />
+</BaseLayout>
