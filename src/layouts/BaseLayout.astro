@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{t(lang, 'hero.names')} — {t(lang, 'hero.welcome')}</title>
+    <meta name="description" content={t(lang, 'hero.tagline')} />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav">
+        <div class="nav-links">
+          <a href="#hero">{t(lang, 'nav.hero')}</a>
+          <a href="#venue">{t(lang, 'nav.venue')}</a>
+          <a href="#schedule">{t(lang, 'nav.schedule')}</a>
+          <a href="#rsvp">{t(lang, 'nav.rsvp')}</a>
+        </div>
+        <LanguageSwitcher currentLang={lang} />
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>{t(lang, 'footer.message')}</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-teal-dark);
+  }
+
+  .site-nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    color: var(--color-cream);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-gold);
+  }
+
+  .site-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background-color: var(--color-teal-dark);
+    color: var(--color-cream);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 600px) {
+    .nav-links {
+      gap: 0.75rem;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+    }
+  }
+</style>

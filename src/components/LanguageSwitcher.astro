@@ -1,0 +1,53 @@
+---
+import { getLocalePath } from '../i18n/utils';
+
+interface Props {
+  currentLang: string;
+}
+
+const { currentLang } = Astro.props;
+
+const languages = [
+  { code: 'en', label: 'EN' },
+  { code: 'sv', label: 'SV' },
+  { code: 'hi', label: 'HI' },
+];
+---
+
+<nav class="lang-switcher" aria-label="Language">
+  {languages.map((lang) => (
+    <a
+      href={getLocalePath(lang.code)}
+      class:list={['lang-link', { active: currentLang === lang.code }]}
+      aria-current={currentLang === lang.code ? 'page' : undefined}
+    >
+      {lang.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .lang-link {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-cream);
+    transition: background-color 0.2s;
+  }
+
+  .lang-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--color-cream);
+  }
+
+  .lang-link.active {
+    background-color: var(--color-gold);
+    color: var(--color-teal-dark);
+  }
+</style>
