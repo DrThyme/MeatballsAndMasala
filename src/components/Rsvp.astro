@@ -1,0 +1,35 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="rsvp" class="section rsvp">
+  <h2 class="section-title">{t(lang, 'rsvp.title')}</h2>
+  <div class="rsvp-placeholder">
+    <p>{t(lang, 'rsvp.message')}</p>
+  </div>
+</section>
+
+<style>
+  .rsvp {
+    background-color: var(--color-white);
+    max-width: 100%;
+    padding: var(--section-padding);
+  }
+
+  .rsvp-placeholder {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem 2rem;
+    border: 2px dashed var(--color-gold);
+    border-radius: 12px;
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+  }
+</style>
