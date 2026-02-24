@@ -1,0 +1,77 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="venue" class="section venue">
+  <h2 class="section-title">{t(lang, 'venue.title')}</h2>
+  <div class="venue-card">
+    <h3 class="venue-name">{t(lang, 'venue.name')}</h3>
+    <p class="venue-address">{t(lang, 'venue.address')}</p>
+    <p class="venue-description">{t(lang, 'venue.description')}</p>
+    <a
+      href="#"
+      class="venue-directions"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t(lang, 'venue.directions')} &rarr;
+    </a>
+  </div>
+</section>
+
+<style>
+  .venue {
+    background-color: var(--color-white);
+    max-width: 100%;
+    padding: var(--section-padding);
+  }
+
+  .venue .section-title {
+    margin-bottom: 2rem;
+  }
+
+  .venue-card {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .venue-name {
+    font-size: 1.5rem;
+    color: var(--color-teal);
+    margin-bottom: 0.5rem;
+  }
+
+  .venue-address {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+  }
+
+  .venue-description {
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .venue-directions {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background-color: var(--color-teal);
+    color: var(--color-cream);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  .venue-directions:hover {
+    background-color: var(--color-teal-dark);
+    color: var(--color-cream);
+  }
+</style>
