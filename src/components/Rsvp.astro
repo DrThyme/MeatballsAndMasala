@@ -1,5 +1,8 @@
 ---
 import { t } from '../i18n/utils';
+import MehndiCorner from './motifs/MehndiCorner.astro';
+import FloralDivider from './motifs/FloralDivider.astro';
+import Polaroid from './Polaroid.astro';
 
 interface Props {
   lang: string;
@@ -9,7 +12,20 @@ const { lang } = Astro.props;
 ---
 
 <section id="rsvp" class="section rsvp">
+  <div class="rsvp-motif-left">
+    <MehndiCorner size="100px" color="var(--color-blush)" opacity={0.18} />
+  </div>
+  <div class="rsvp-motif-right">
+    <MehndiCorner size="100px" color="var(--color-blush)" opacity={0.18} flip />
+  </div>
+  <div class="rsvp-polaroid">
+    <Polaroid rotation={-3} caption="Save the date!" placeholderColor="var(--color-blush)" />
+  </div>
+
   <h2 class="section-title">{t(lang, 'rsvp.title')}</h2>
+  <div class="rsvp-divider">
+    <FloralDivider width="160px" color="var(--color-blush)" />
+  </div>
   <div class="rsvp-placeholder">
     <p>{t(lang, 'rsvp.message')}</p>
   </div>
@@ -20,6 +36,34 @@ const { lang } = Astro.props;
     background-color: var(--color-white);
     max-width: 100%;
     padding: var(--section-padding);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rsvp-motif-left {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    pointer-events: none;
+  }
+
+  .rsvp-motif-right {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    pointer-events: none;
+  }
+
+  .rsvp-polaroid {
+    position: absolute;
+    top: 4rem;
+    right: 5%;
+  }
+
+  .rsvp-divider {
+    text-align: center;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
   }
 
   .rsvp-placeholder {
@@ -31,5 +75,12 @@ const { lang } = Astro.props;
     border-radius: 12px;
     color: var(--color-text-light);
     font-size: 1.1rem;
+  }
+
+  @media (max-width: 600px) {
+    .rsvp-motif-left,
+    .rsvp-motif-right {
+      display: none;
+    }
   }
 </style>
