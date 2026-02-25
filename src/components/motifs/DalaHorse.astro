@@ -1,0 +1,52 @@
+---
+interface Props {
+  size?: string;
+  color?: string;
+  opacity?: number;
+}
+
+const { size = '80px', color = 'var(--color-teal)', opacity = 0.2 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 100 100"
+  fill="none"
+  style={`opacity: ${opacity};`}
+  aria-hidden="true"
+>
+  <!-- Simplified Dala horse silhouette -->
+  <path
+    d="M30 85 L30 55 L25 40 L30 30 L40 20 L50 18 L55 22 L58 30
+       L70 35 L75 45 L72 55 L72 85 Z"
+    stroke={color}
+    stroke-width="1.5"
+    fill="none"
+  />
+  <!-- Saddle decoration -->
+  <path
+    d="M38 40 Q50 35 65 42"
+    stroke={color}
+    stroke-width="1"
+    fill="none"
+  />
+  <path
+    d="M40 48 Q50 44 62 50"
+    stroke={color}
+    stroke-width="1"
+    fill="none"
+  />
+  <!-- Mane -->
+  <path
+    d="M40 22 Q35 15 42 12 Q48 15 45 20"
+    stroke={color}
+    stroke-width="1"
+    fill="none"
+  />
+  <!-- Eye -->
+  <circle cx="48" cy="26" r="2" fill={color} />
+  <!-- Leg details -->
+  <line x1="35" y1="70" x2="35" y2="85" stroke={color} stroke-width="1" />
+  <line x1="67" y1="70" x2="67" y2="85" stroke={color} stroke-width="1" />
+</svg>
