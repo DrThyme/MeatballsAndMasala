@@ -3,6 +3,8 @@ interface Props {
   caption?: string;
   rotation?: number;
   placeholderColor?: string;
+  hoverX?: string;
+  hoverY?: string;
   class?: string;
 }
 
@@ -10,13 +12,15 @@ const {
   caption,
   rotation = 0,
   placeholderColor = 'var(--color-teal)',
+  hoverX = '0px',
+  hoverY = '-40px',
   class: className = '',
 } = Astro.props;
 ---
 
 <div
   class={`polaroid ${className}`}
-  style={`--rotation: ${rotation}deg;`}
+  style={`--rotation: ${rotation}deg; --hover-x: ${hoverX}; --hover-y: ${hoverY};`}
 >
   <div class="polaroid-image" style={`background: linear-gradient(135deg, ${placeholderColor}, var(--color-gold-light));`}>
     <slot />
@@ -30,15 +34,17 @@ const {
     padding: 8px 8px 28px;
     box-shadow: var(--shadow-card);
     transform: rotate(var(--rotation));
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
     width: fit-content;
     position: absolute;
     z-index: 2;
+    cursor: pointer;
   }
 
   .polaroid:hover {
-    transform: rotate(var(--rotation)) translateY(-4px);
+    transform: rotate(0deg) translate(var(--hover-x, 0px), var(--hover-y, -40px));
     box-shadow: var(--shadow-card-hover);
+    z-index: 10;
   }
 
   .polaroid-image {
