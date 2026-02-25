@@ -1,5 +1,8 @@
 ---
 import { t } from '../i18n/utils';
+import MehndiCorner from './motifs/MehndiCorner.astro';
+import FloralDivider from './motifs/FloralDivider.astro';
+import Polaroid from './Polaroid.astro';
 
 interface Props {
   lang: string;
@@ -12,7 +15,23 @@ const day2Events = ['ceremony', 'dinner', 'party'];
 ---
 
 <section id="schedule" class="section schedule">
+  <div class="schedule-motif-left">
+    <MehndiCorner size="100px" color="var(--color-gold)" opacity={0.15} />
+  </div>
+  <div class="schedule-motif-right">
+    <MehndiCorner size="100px" color="var(--color-gold)" opacity={0.15} flip />
+  </div>
+  <div class="schedule-polaroid-1">
+    <Polaroid rotation={6} placeholderColor="var(--color-gold)" />
+  </div>
+  <div class="schedule-polaroid-2">
+    <Polaroid rotation={-4} placeholderColor="var(--color-teal)" />
+  </div>
+
   <h2 class="section-title">{t(lang, 'schedule.title')}</h2>
+  <div class="schedule-divider">
+    <FloralDivider width="160px" />
+  </div>
 
   <div class="timeline">
     <div class="day-header">
@@ -48,6 +67,43 @@ const day2Events = ['ceremony', 'dinner', 'party'];
 </section>
 
 <style>
+  .schedule {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .schedule-motif-left {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    pointer-events: none;
+  }
+
+  .schedule-motif-right {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    pointer-events: none;
+  }
+
+  .schedule-polaroid-1 {
+    position: absolute;
+    top: 6rem;
+    right: 3%;
+  }
+
+  .schedule-polaroid-2 {
+    position: absolute;
+    bottom: 4rem;
+    left: 3%;
+  }
+
+  .schedule-divider {
+    text-align: center;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+
   .timeline {
     max-width: 500px;
     margin: 0 auto;
@@ -138,6 +194,11 @@ const day2Events = ['ceremony', 'dinner', 'party'];
   }
 
   @media (max-width: 600px) {
+    .schedule-motif-left,
+    .schedule-motif-right {
+      display: none;
+    }
+
     .timeline::before {
       left: 60px;
     }
