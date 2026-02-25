@@ -93,3 +93,63 @@ const { lang } = Astro.props;
     }
   }
 </style>
+
+<style is:global>
+  /* Watercolor wash between sections */
+  #venue {
+    position: relative;
+  }
+
+  #venue::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 10%;
+    width: 80%;
+    height: 80px;
+    background: radial-gradient(ellipse at center, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #schedule {
+    position: relative;
+  }
+
+  #schedule::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: 5%;
+    width: 60%;
+    height: 60px;
+    background: radial-gradient(ellipse at center, rgba(212, 145, 122, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #rsvp {
+    position: relative;
+  }
+
+  #rsvp::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 20%;
+    width: 60%;
+    height: 80px;
+    background: radial-gradient(ellipse at center, rgba(232, 201, 106, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Scalloped section dividers */
+  #venue,
+  #rsvp {
+    clip-path: polygon(
+      0% 3%, 5% 0%, 10% 3%, 15% 0%, 20% 3%, 25% 0%, 30% 3%, 35% 0%,
+      40% 3%, 45% 0%, 50% 3%, 55% 0%, 60% 3%, 65% 0%, 70% 3%, 75% 0%,
+      80% 3%, 85% 0%, 90% 3%, 95% 0%, 100% 3%,
+      100% 100%, 0% 100%
+    );
+    padding-top: calc(var(--section-padding) + 1rem);
+  }
+</style>
