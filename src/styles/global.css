@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&family=Noto+Serif:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Great+Vibes&family=Noto+Sans:wght@400;500;600&family=Noto+Serif:wght@400;700&family=Noto+Serif+Devanagari:wght@400;700&display=swap');
 
 :root {
   --color-gold: #D4A843;
@@ -10,9 +10,15 @@
   --color-white: #FFFFFF;
   --color-text: #2C2C2C;
   --color-text-light: #5A5A5A;
+  --color-ivory: #FAF3E0;
+  --shadow-card: 0 4px 12px rgba(15, 47, 58, 0.12);
+  --shadow-card-hover: 0 8px 20px rgba(15, 47, 58, 0.18);
 
   --font-heading: 'Noto Serif', Georgia, serif;
   --font-body: 'Noto Sans', system-ui, sans-serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-handwritten: 'Caveat', cursive;
+  --font-heading-hi: 'Noto Serif Devanagari', 'Noto Serif', Georgia, serif;
 
   --max-width: 900px;
   --section-padding: 5rem 1.5rem;
@@ -35,6 +41,21 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-cream);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(180, 160, 130, 0.03) 2px,
+      rgba(180, 160, 130, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(180, 160, 130, 0.03) 2px,
+      rgba(180, 160, 130, 0.03) 4px
+    );
   line-height: 1.7;
   font-size: 1.05rem;
 }
@@ -61,10 +82,12 @@ a:hover {
 }
 
 .section-title {
-  font-size: 2rem;
+  font-family: var(--font-script);
+  font-size: 2.5rem;
   text-align: center;
   margin-bottom: 2rem;
   color: var(--color-teal-dark);
+  font-weight: 400;
 }
 
 .section-title::after {
@@ -75,6 +98,17 @@ a:hover {
   background: var(--color-gold);
   margin: 0.75rem auto 0;
   border-radius: 2px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 600px) {
