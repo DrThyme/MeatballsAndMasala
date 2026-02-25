@@ -1,5 +1,7 @@
 ---
 import { t } from '../i18n/utils';
+import Mandala from './motifs/Mandala.astro';
+import MehndiCorner from './motifs/MehndiCorner.astro';
 
 interface Props {
   lang: string;
@@ -9,6 +11,15 @@ const { lang } = Astro.props;
 ---
 
 <section id="hero" class="hero">
+  <div class="hero-mandala">
+    <Mandala size="400px" color="var(--color-cream)" opacity={0.1} />
+  </div>
+  <div class="hero-motif-left">
+    <MehndiCorner size="150px" color="var(--color-gold-light)" opacity={0.15} />
+  </div>
+  <div class="hero-motif-right">
+    <MehndiCorner size="150px" color="var(--color-gold-light)" opacity={0.15} flip />
+  </div>
   <div class="hero-content">
     <p class="hero-welcome">{t(lang, 'hero.welcome')}</p>
     <h1 class="hero-names">{t(lang, 'hero.names')}</h1>
@@ -32,10 +43,36 @@ const { lang } = Astro.props;
     );
     color: var(--color-cream);
     padding: 4rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-mandala {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-motif-left {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    pointer-events: none;
+  }
+
+  .hero-motif-right {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    pointer-events: none;
   }
 
   .hero-content {
     max-width: 600px;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-welcome {
@@ -48,7 +85,7 @@ const { lang } = Astro.props;
 
   .hero-names {
     font-size: 3.5rem;
-    font-family: var(--font-heading);
+    font-family: var(--font-script);
     color: var(--color-cream);
     margin-bottom: 0.75rem;
   }
@@ -73,11 +110,21 @@ const { lang } = Astro.props;
     }
 
     .hero-names {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
     }
 
     .hero-date {
       font-size: 1.1rem;
+    }
+
+    .hero-motif-left,
+    .hero-motif-right {
+      display: none;
+    }
+
+    .hero-mandala :global(svg) {
+      width: 250px;
+      height: 250px;
     }
   }
 </style>
