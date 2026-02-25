@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import DalaHorse from '../components/motifs/DalaHorse.astro';
 import { t } from '../i18n/utils';
 
 interface Props {
@@ -36,7 +37,13 @@ const { lang } = Astro.props;
     </main>
 
     <footer class="site-footer">
+      <div class="footer-dala-left">
+        <DalaHorse size="50px" color="var(--color-gold-light)" opacity={0.3} />
+      </div>
       <p>{t(lang, 'footer.message')}</p>
+      <div class="footer-dala-right">
+        <DalaHorse size="50px" color="var(--color-gold-light)" opacity={0.3} />
+      </div>
     </footer>
   </body>
 </html>
@@ -81,6 +88,16 @@ const { lang } = Astro.props;
     color: var(--color-cream);
     font-family: var(--font-heading);
     font-size: 1.1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .footer-dala-left,
+  .footer-dala-right {
+    flex-shrink: 0;
   }
 
   @media (max-width: 600px) {
@@ -90,6 +107,11 @@ const { lang } = Astro.props;
 
     .nav-links a {
       font-size: 0.8rem;
+    }
+
+    .footer-dala-left,
+    .footer-dala-right {
+      display: none;
     }
   }
 </style>
