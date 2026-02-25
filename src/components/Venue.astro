@@ -1,5 +1,8 @@
 ---
 import { t } from '../i18n/utils';
+import DalaHorse from './motifs/DalaHorse.astro';
+import FloralDivider from './motifs/FloralDivider.astro';
+import Polaroid from './Polaroid.astro';
 
 interface Props {
   lang: string;
@@ -9,7 +12,20 @@ const { lang } = Astro.props;
 ---
 
 <section id="venue" class="section venue">
+  <div class="venue-polaroid-1">
+    <Polaroid rotation={-5} caption="Wiks Slott" placeholderColor="var(--color-teal)" />
+  </div>
+  <div class="venue-polaroid-2">
+    <Polaroid rotation={4} placeholderColor="var(--color-blush)" />
+  </div>
+  <div class="venue-dala">
+    <DalaHorse size="100px" color="var(--color-teal)" opacity={0.12} />
+  </div>
+
   <h2 class="section-title">{t(lang, 'venue.title')}</h2>
+  <div class="venue-divider">
+    <FloralDivider width="180px" />
+  </div>
   <div class="venue-card">
     <h3 class="venue-name">{t(lang, 'venue.name')}</h3>
     <p class="venue-address">{t(lang, 'venue.address')}</p>
@@ -30,10 +46,36 @@ const { lang } = Astro.props;
     background-color: var(--color-white);
     max-width: 100%;
     padding: var(--section-padding);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .venue-polaroid-1 {
+    position: absolute;
+    top: 4rem;
+    left: 3%;
+  }
+
+  .venue-polaroid-2 {
+    position: absolute;
+    bottom: 3rem;
+    right: 4%;
+  }
+
+  .venue-dala {
+    position: absolute;
+    bottom: 2rem;
+    left: 5%;
+    pointer-events: none;
+  }
+
+  .venue-divider {
+    text-align: center;
+    margin-bottom: 2rem;
   }
 
   .venue .section-title {
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
   }
 
   .venue-card {
@@ -73,5 +115,11 @@ const { lang } = Astro.props;
   .venue-directions:hover {
     background-color: var(--color-teal-dark);
     color: var(--color-cream);
+  }
+
+  @media (max-width: 600px) {
+    .venue-dala {
+      display: none;
+    }
   }
 </style>
