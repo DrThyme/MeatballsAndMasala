@@ -1,0 +1,69 @@
+---
+interface Props {
+  caption?: string;
+  rotation?: number;
+  placeholderColor?: string;
+  class?: string;
+}
+
+const {
+  caption,
+  rotation = 0,
+  placeholderColor = 'var(--color-teal)',
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class={`polaroid ${className}`}
+  style={`--rotation: ${rotation}deg;`}
+>
+  <div class="polaroid-image" style={`background: linear-gradient(135deg, ${placeholderColor}, var(--color-gold-light));`}>
+    <slot />
+  </div>
+  {caption && <p class="polaroid-caption">{caption}</p>}
+</div>
+
+<style>
+  .polaroid {
+    background: var(--color-ivory);
+    padding: 8px 8px 28px;
+    box-shadow: var(--shadow-card);
+    transform: rotate(var(--rotation));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: fit-content;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .polaroid:hover {
+    transform: rotate(var(--rotation)) translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .polaroid-image {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+  }
+
+  .polaroid-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .polaroid-caption {
+    font-family: var(--font-handwritten);
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .polaroid {
+      display: none;
+    }
+  }
+</style>
