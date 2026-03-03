@@ -5,6 +5,7 @@ interface Props {
   placeholderColor?: string;
   hoverX?: string;
   hoverY?: string;
+  debugNum?: number;
   class?: string;
 }
 
@@ -14,6 +15,7 @@ const {
   placeholderColor = 'var(--color-teal)',
   hoverX = '0px',
   hoverY = '-40px',
+  debugNum,
   class: className = '',
 } = Astro.props;
 ---
@@ -22,6 +24,7 @@ const {
   class={`polaroid ${className}`}
   style={`--rotation: ${rotation}deg; --hover-x: ${hoverX}; --hover-y: ${hoverY};`}
 >
+  {debugNum !== undefined && <span class="polaroid-debug">{debugNum}</span>}
   <div class="polaroid-image" style={`background: linear-gradient(135deg, ${placeholderColor}, var(--color-gold-light));`}>
     <slot />
   </div>
@@ -57,6 +60,25 @@ const {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .polaroid-debug {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    width: 28px;
+    height: 28px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: var(--font-body);
+    z-index: 20;
+    pointer-events: none;
   }
 
   .polaroid-caption {

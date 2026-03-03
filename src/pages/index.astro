@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import PhotoBanner from '../components/PhotoBanner.astro';
 import Venue from '../components/Venue.astro';
 import Schedule from '../components/Schedule.astro';
+import Welcome from '../components/Welcome.astro';
 import Rsvp from '../components/Rsvp.astro';
 
 const lang = 'en';
@@ -10,7 +12,12 @@ const lang = 'en';
 
 <BaseLayout lang={lang}>
   <Hero lang={lang} />
+  <Welcome lang={lang} />
+  <PhotoBanner image="/photos/frozen-lake.jpg" caption="From the land of midnight sun" alt="Frozen Swedish lake with pine forest" />
   <Venue lang={lang} />
+  <PhotoBanner image="/photos/mountains.jpg" caption="To the peaks of the Himalayas" alt="Mountain road in the Indian Himalayas" />
   <Schedule lang={lang} />
+  <PhotoBanner image="/photos/misty-mountains.jpg" caption="Where mountains touch the sky" alt="Misty mountain landscape in the Himalayas" />
   <Rsvp lang={lang} />
+  <PhotoBanner image="/photos/valley-road.jpg" caption="Every journey leads to you" alt="Valley road through the Indian Himalayas" />
 </BaseLayout>

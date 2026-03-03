@@ -1,8 +1,8 @@
 ---
-import { t } from '../i18n/utils';
-import MehndiCorner from './motifs/MehndiCorner.astro';
-import FloralDivider from './motifs/FloralDivider.astro';
-import Polaroid from './Polaroid.astro';
+import { t } from "../i18n/utils";
+import MehndiCorner from "./motifs/MehndiCorner.astro";
+import FloralDivider from "./motifs/FloralDivider.astro";
+import Polaroid from "./Polaroid.astro";
 
 interface Props {
   lang: string;
@@ -10,8 +10,9 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const day1Events = ['mehendi'];
-const day2Events = ['ceremony', 'dinner', 'party'];
+const day1Events = ["mehendi"];
+const day2Events = ["ceremony", "dinner", "party"];
+const eventsWithDetails = ["mehendi", "ceremony"];
 ---
 
 <section id="schedule" class="section schedule reveal">
@@ -22,53 +23,95 @@ const day2Events = ['ceremony', 'dinner', 'party'];
     <MehndiCorner size="100px" color="var(--color-gold)" opacity={0.15} flip />
   </div>
   <div class="schedule-polaroid-1">
-    <Polaroid rotation={6} placeholderColor="var(--color-gold)" hoverX="-30px" hoverY="20px" />
+    <Polaroid
+      debugNum={3}
+      rotation={6}
+      caption="Mountain top!"
+      placeholderColor="var(--color-gold)"
+      hoverX="-30px"
+      hoverY="20px"
+    >
+      <img
+        src="/photos/couple-mountain.jpg"
+        alt="Priya and Tim on a mountain"
+      />
+    </Polaroid>
   </div>
   <div class="schedule-polaroid-2">
-    <Polaroid rotation={-4} placeholderColor="var(--color-teal)" hoverX="30px" hoverY="-20px" />
+    <Polaroid
+      debugNum={4}
+      rotation={-4}
+      caption="Diwali vibes"
+      placeholderColor="var(--color-blush)"
+      hoverX="30px"
+      hoverY="-20px"
+    >
+      <img src="/photos/couple-diwali.jpg" alt="Priya and Tim celebrating Diwali" />
+    </Polaroid>
   </div>
 
-  <h2 class="section-title">{t(lang, 'schedule.title')}</h2>
+  <h2 class="section-title">{t(lang, "schedule.title")}</h2>
   <div class="schedule-divider">
     <FloralDivider width="160px" />
   </div>
 
   <div class="timeline">
     <div class="day-header">
-      <span class="day-date">{t(lang, 'schedule.day1.date')}</span>
-      <span class="day-title">{t(lang, 'schedule.day1.title')}</span>
+      <span class="day-date">{t(lang, "schedule.day1.date")}</span>
+      <span class="day-title">{t(lang, "schedule.day1.title")}</span>
     </div>
-    {day1Events.map((event) => (
-      <div class="timeline-item">
-        <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
-        <div class="timeline-dot" />
-        <div class="timeline-content">
-          <h3>{t(lang, `schedule.${event}.title`)}</h3>
-          <p>{t(lang, `schedule.${event}.description`)}</p>
+    {
+      day1Events.map((event) => (
+        <div class="timeline-item">
+          <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
+          <div class="timeline-dot" />
+          <div class="timeline-content">
+            <h3>{t(lang, `schedule.${event}.title`)}</h3>
+            <p>{t(lang, `schedule.${event}.description`)}</p>
+            {eventsWithDetails.includes(event) && (
+              <details class="event-details">
+                <summary>{t(lang, `schedule.${event}.learnMore`)}</summary>
+                <p class="event-explanation">
+                  {t(lang, `schedule.${event}.explanation`)}
+                </p>
+              </details>
+            )}
+          </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
 
     <div class="day-header">
-      <span class="day-date">{t(lang, 'schedule.day2.date')}</span>
-      <span class="day-title">{t(lang, 'schedule.day2.title')}</span>
+      <span class="day-date">{t(lang, "schedule.day2.date")}</span>
+      <span class="day-title">{t(lang, "schedule.day2.title")}</span>
     </div>
-    {day2Events.map((event) => (
-      <div class="timeline-item">
-        <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
-        <div class="timeline-dot" />
-        <div class="timeline-content">
-          <h3>{t(lang, `schedule.${event}.title`)}</h3>
-          <p>{t(lang, `schedule.${event}.description`)}</p>
+    {
+      day2Events.map((event) => (
+        <div class="timeline-item">
+          <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
+          <div class="timeline-dot" />
+          <div class="timeline-content">
+            <h3>{t(lang, `schedule.${event}.title`)}</h3>
+            <p>{t(lang, `schedule.${event}.description`)}</p>
+            {eventsWithDetails.includes(event) && (
+              <details class="event-details">
+                <summary>{t(lang, `schedule.${event}.learnMore`)}</summary>
+                <p class="event-explanation">
+                  {t(lang, `schedule.${event}.explanation`)}
+                </p>
+              </details>
+            )}
+          </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </section>
 
 <style>
   .schedule {
     position: relative;
+    z-index: 2;
   }
 
   .schedule-motif-left {
@@ -87,14 +130,14 @@ const day2Events = ['ceremony', 'dinner', 'party'];
 
   .schedule-polaroid-1 {
     position: absolute;
-    top: 6rem;
-    right: max(1rem, calc(50% - 550px));
+    top: 4.6rem;
+    right: max(1.5rem, calc(50% - 480px));
   }
 
   .schedule-polaroid-2 {
     position: absolute;
-    bottom: 4rem;
-    left: max(1rem, calc(50% - 550px));
+    bottom: 17.5rem;
+    left: calc(50% - 560px);
   }
 
   .schedule-divider {
@@ -110,7 +153,7 @@ const day2Events = ['ceremony', 'dinner', 'party'];
   }
 
   .timeline::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 80px;
     top: 0;
@@ -190,6 +233,47 @@ const day2Events = ['ceremony', 'dinner', 'party'];
   .timeline-content p {
     color: var(--color-text-light);
     font-size: 0.95rem;
+  }
+
+  .event-details {
+    margin-top: 0.5rem;
+  }
+
+  .event-details summary {
+    font-family: var(--font-handwritten);
+    font-size: 1rem;
+    color: var(--color-gold);
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .event-details summary::before {
+    content: "▸";
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .event-details[open] summary::before {
+    transform: rotate(90deg);
+  }
+
+  .event-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .event-explanation {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-ivory);
+    border-left: 3px solid var(--color-gold);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text);
   }
 
   @media (max-width: 600px) {

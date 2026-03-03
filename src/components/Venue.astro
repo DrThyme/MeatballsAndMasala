@@ -1,8 +1,8 @@
 ---
-import { t } from '../i18n/utils';
-import DalaHorse from './motifs/DalaHorse.astro';
-import FloralDivider from './motifs/FloralDivider.astro';
-import Polaroid from './Polaroid.astro';
+import { t } from "../i18n/utils";
+import DalaHorse from "./motifs/DalaHorse.astro";
+import FloralDivider from "./motifs/FloralDivider.astro";
+import Polaroid from "./Polaroid.astro";
 
 interface Props {
   lang: string;
@@ -13,30 +13,48 @@ const { lang } = Astro.props;
 
 <section id="venue" class="section venue reveal">
   <div class="venue-polaroid-1">
-    <Polaroid rotation={-5} caption="Wiks Slott" placeholderColor="var(--color-teal)" hoverX="30px" hoverY="-20px" />
+    <Polaroid
+      debugNum={1}
+      rotation={-5}
+      caption="Wiks Slott"
+      placeholderColor="var(--color-teal)"
+      hoverX="30px"
+      hoverY="-20px"
+    >
+      <img src="/photos/wiks.jpg" alt="Wiks Slott castle" />
+    </Polaroid>
   </div>
   <div class="venue-polaroid-2">
-    <Polaroid rotation={4} placeholderColor="var(--color-blush)" hoverX="-30px" hoverY="-20px" />
+    <Polaroid
+      debugNum={2}
+      rotation={4}
+      caption="La dolce vita"
+      placeholderColor="var(--color-blush)"
+      hoverX="-30px"
+      hoverY="-20px"
+    >
+      <img src="/photos/couple-cafe.jpg" alt="Priya and Tim at a cafe" />
+    </Polaroid>
   </div>
   <div class="venue-dala">
     <DalaHorse size="100px" color="var(--color-teal)" opacity={0.12} />
   </div>
 
-  <h2 class="section-title">{t(lang, 'venue.title')}</h2>
+  <h2 class="section-title">{t(lang, "venue.title")}</h2>
   <div class="venue-divider">
     <FloralDivider width="180px" />
   </div>
   <div class="venue-card">
-    <h3 class="venue-name">{t(lang, 'venue.name')}</h3>
-    <p class="venue-address">{t(lang, 'venue.address')}</p>
-    <p class="venue-description">{t(lang, 'venue.description')}</p>
+    <h3 class="venue-name">{t(lang, "venue.name")}</h3>
+    <p class="venue-address">{t(lang, "venue.address")}</p>
+    <p class="venue-description">{t(lang, "venue.description")}</p>
     <a
       href="https://www.google.com/maps/place/Wiks+Slott,+Uppsala,+Sweden"
       class="venue-directions"
       target="_blank"
       rel="noopener noreferrer"
     >
-      {t(lang, 'venue.directions')} &rarr;
+      {t(lang, "venue.directions")} &rarr;
     </a>
   </div>
 </section>
@@ -47,19 +65,20 @@ const { lang } = Astro.props;
     max-width: 100%;
     padding: var(--section-padding);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    z-index: 2;
   }
 
   .venue-polaroid-1 {
     position: absolute;
-    top: 6rem;
-    left: max(1rem, calc(50% - 550px));
+    top: 4rem;
+    left: max(1.5rem, calc(50% - 480px));
   }
 
   .venue-polaroid-2 {
     position: absolute;
-    bottom: 3rem;
-    right: max(1rem, calc(50% - 550px));
+    bottom: 16rem;
+    right: max(1.5rem, calc(50% - 460px));
   }
 
   .venue-dala {
