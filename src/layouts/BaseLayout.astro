@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import DalaHorse from '../components/motifs/DalaHorse.astro';
+import LotusVineBorder from '../components/motifs/LotusVineBorder.astro';
 import { t } from '../i18n/utils';
 
 interface Props {
@@ -24,6 +24,7 @@ const { lang } = Astro.props;
       <nav class="site-nav">
         <div class="nav-links">
           <a href="#hero">{t(lang, 'nav.hero')}</a>
+          <a href="#ourstory">{t(lang, 'nav.ourstory')}</a>
           <a href="#venue">{t(lang, 'nav.venue')}</a>
           <a href="#schedule">{t(lang, 'nav.schedule')}</a>
           <a href="#rsvp">{t(lang, 'nav.rsvp')}</a>
@@ -37,13 +38,10 @@ const { lang } = Astro.props;
     </main>
 
     <footer class="site-footer">
-      <div class="footer-dala-left">
-        <DalaHorse size="50px" color="var(--color-gold-light)" opacity={0.3} />
+      <div class="footer-border">
+        <LotusVineBorder width="250px" color="var(--color-gold-light)" opacity={0.4} />
       </div>
       <p>{t(lang, 'footer.message')}</p>
-      <div class="footer-dala-right">
-        <DalaHorse size="50px" color="var(--color-gold-light)" opacity={0.3} />
-      </div>
     </footer>
   </body>
 </html>
@@ -84,20 +82,14 @@ const { lang } = Astro.props;
   .site-footer {
     text-align: center;
     padding: 2rem 1.5rem;
-    background-color: var(--color-teal-dark);
+    background-color: rgba(15, 30, 30, 0.8);
     color: var(--color-cream);
     font-family: var(--font-heading);
     font-size: 1.1rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
   }
 
-  .footer-dala-left,
-  .footer-dala-right {
-    flex-shrink: 0;
+  .footer-border {
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 600px) {
@@ -109,58 +101,6 @@ const { lang } = Astro.props;
       font-size: 0.8rem;
     }
 
-    .footer-dala-left,
-    .footer-dala-right {
-      display: none;
-    }
-  }
-</style>
-
-<style is:global>
-  /* Watercolor wash between sections */
-  #venue {
-    position: relative;
-  }
-
-  #venue::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    left: 10%;
-    width: 80%;
-    height: 80px;
-    background: radial-gradient(ellipse at center, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  #schedule {
-    position: relative;
-  }
-
-  #schedule::before {
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: 5%;
-    width: 60%;
-    height: 60px;
-    background: radial-gradient(ellipse at center, rgba(212, 145, 122, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  #rsvp {
-    position: relative;
-  }
-
-  #rsvp::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    left: 20%;
-    width: 60%;
-    height: 80px;
-    background: radial-gradient(ellipse at center, rgba(232, 201, 106, 0.08) 0%, transparent 70%);
-    pointer-events: none;
   }
 </style>
 

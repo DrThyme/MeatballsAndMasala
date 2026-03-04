@@ -38,5 +38,15 @@
   "schedule.party.description": "नृत्य और उत्सव",
   "rsvp.title": "आर.एस.वी.पी.",
   "rsvp.message": "आर.एस.वी.पी. फॉर्म जल्द आ रहा है! कृपया बाद में देखें।",
-  "footer.message": "हम आपके साथ जश्न मनाने के लिए बेसब्र हैं!"
+  "footer.message": "हम आपके साथ जश्न मनाने के लिए बेसब्र हैं!",
+  "nav.ourstory": "हमारी कहानी",
+  "ourstory.title": "हमारी कहानी",
+  "ourstory.milestone1.title": "पहली मुलाकात",
+  "ourstory.milestone1.description": "दो अजनबी, एक साझा पल",
+  "ourstory.milestone2.title": "पार्क में सैर",
+  "ourstory.milestone2.description": "जहाँ बातें कभी खत्म नहीं हुईं",
+  "ourstory.milestone3.title": "शहर के किस्से",
+  "ourstory.milestone3.description": "साथ मिलकर दुनिया देखना",
+  "ourstory.milestone4.title": "साथ तब से",
+  "ourstory.milestone4.date": "26.09.05"
 }

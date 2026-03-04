@@ -1,23 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import PhotoBanner from '../../components/PhotoBanner.astro';
-import Venue from '../../components/Venue.astro';
-import Schedule from '../../components/Schedule.astro';
+import PeacockHero from '../../components/PeacockHero.astro';
+import OurStory from '../../components/OurStory.astro';
+import IllustratedScene from '../../components/IllustratedScene.astro';
 import Welcome from '../../components/Welcome.astro';
+import StoryVenue from '../../components/StoryVenue.astro';
+import Schedule from '../../components/Schedule.astro';
 import Rsvp from '../../components/Rsvp.astro';
 
 const lang = 'sv';
 ---
 
 <BaseLayout lang={lang}>
-  <Hero lang={lang} />
+  <PeacockHero lang={lang} />
+  <OurStory lang={lang} />
+  <IllustratedScene image="/illustrations/swedish-archipelago.png" caption="From the land of midnight sun" alt="Swedish red cottages by the sea" />
   <Welcome lang={lang} />
-  <PhotoBanner image="/photos/frozen-lake.jpg" caption="Från midnattsolens land" alt="Frusen svensk sjö med tallskog" />
-  <Venue lang={lang} />
-  <PhotoBanner image="/photos/mountains.jpg" caption="Till Himalayas toppar" alt="Bergsväg i indiska Himalaya" />
+  <IllustratedScene image="/illustrations/himalayan-peaks.png" caption="To the peaks of the Himalayas" alt="Snow-capped Himalayan mountains" />
+  <StoryVenue lang={lang} />
+  <IllustratedScene image="/illustrations/swedish-meadow.png" caption="Where wildflowers dance" alt="Swedish meadow with bluebells and strawberries" />
   <Schedule lang={lang} />
-  <PhotoBanner image="/photos/misty-mountains.jpg" caption="Där bergen möter himlen" alt="Dimmigt bergslandskap i Himalaya" />
+  <IllustratedScene image="/illustrations/holding-hands.png" caption="Two hands, one journey" alt="Couple holding hands with mehndi designs" />
   <Rsvp lang={lang} />
-  <PhotoBanner image="/photos/valley-road.jpg" caption="Varje resa leder till dig" alt="Dalväg genom indiska Himalaya" />
 </BaseLayout>
