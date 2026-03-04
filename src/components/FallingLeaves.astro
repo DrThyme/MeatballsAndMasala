@@ -1,0 +1,72 @@
+---
+interface Props {
+  count?: number;
+}
+
+const { count = 6 } = Astro.props;
+const leaves = Array.from({ length: count }, (_, i) => i);
+---
+
+<div class="falling-leaves" aria-hidden="true">
+  {leaves.map((i) => (
+    <div
+      class="leaf"
+      style={`--delay: ${i * 2.5}s; --x-start: ${15 + i * 13}%; --duration: ${8 + (i % 3) * 3}s; --x-drift: ${(i % 2 === 0 ? 1 : -1) * (20 + i * 5)}px;`}
+    />
+  ))}
+</div>
+
+<style>
+  .falling-leaves {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+  }
+
+  .leaf {
+    position: absolute;
+    top: -20px;
+    left: var(--x-start);
+    width: 8px;
+    height: 6px;
+    background: var(--color-gold);
+    border-radius: 0 50% 50% 50%;
+    opacity: 0.4;
+    animation: fall var(--duration) var(--delay) infinite ease-in-out;
+    transform: rotate(45deg);
+  }
+
+  @keyframes fall {
+    0% {
+      top: -20px;
+      opacity: 0;
+      transform: rotate(45deg) translateX(0);
+    }
+    10% {
+      opacity: 0.4;
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      top: 100vh;
+      opacity: 0;
+      transform: rotate(180deg) translateX(var(--x-drift));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .leaf:nth-child(n+4) {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .leaf {
+      animation: none;
+      display: none;
+    }
+  }
+</style>

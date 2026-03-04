@@ -37,10 +37,12 @@ const { image, caption, alt } = Astro.props;
 
   .scene-img {
     width: 100%;
-    height: 100%;
+    height: 120%;
     object-fit: cover;
     object-position: center;
     display: block;
+    margin-top: -10%;
+    transition: transform 0.1s linear;
   }
 
   .scene-overlay {
@@ -80,3 +82,27 @@ const { image, caption, alt } = Astro.props;
     }
   }
 </style>
+
+<script>
+  const scenes = document.querySelectorAll('.scene-img');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLElement;
+          const handleScroll = () => {
+            const rect = img.parentElement!.getBoundingClientRect();
+            const progress = 1 - (rect.bottom / (window.innerHeight + rect.height));
+            const offset = progress * 20 - 10;
+            img.style.transform = `translateY(${offset}%)`;
+          };
+          window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+      });
+    },
+    { threshold: 0 }
+  );
+
+  scenes.forEach((s) => observer.observe(s));
+</script>
