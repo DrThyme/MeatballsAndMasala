@@ -1,0 +1,89 @@
+---
+import LotusCorner from './motifs/LotusCorner.astro';
+
+interface Props {
+  class?: string;
+  padding?: string;
+}
+
+const { class: className = '', padding = '3rem' } = Astro.props;
+---
+
+<div class:list={['gold-frame', className]} style={`--frame-padding: ${padding};`}>
+  <div class="gold-frame-border">
+    <div class="gold-frame-corner top-left">
+      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} />
+    </div>
+    <div class="gold-frame-corner top-right">
+      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} flip />
+    </div>
+    <div class="gold-frame-corner bottom-left">
+      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} />
+    </div>
+    <div class="gold-frame-corner bottom-right">
+      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} flip />
+    </div>
+  </div>
+  <div class="gold-frame-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .gold-frame {
+    position: relative;
+    padding: var(--frame-padding);
+  }
+
+  .gold-frame-border {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(200, 150, 62, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .gold-frame-corner {
+    position: absolute;
+  }
+
+  .gold-frame-corner.top-left {
+    top: -8px;
+    left: -8px;
+  }
+
+  .gold-frame-corner.top-right {
+    top: -8px;
+    right: -8px;
+    transform: scaleX(-1);
+  }
+
+  .gold-frame-corner.bottom-left {
+    bottom: -8px;
+    left: -8px;
+    transform: scaleY(-1);
+  }
+
+  .gold-frame-corner.bottom-right {
+    bottom: -8px;
+    right: -8px;
+    transform: scale(-1);
+  }
+
+  .gold-frame-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 600px) {
+    .gold-frame {
+      --frame-padding: 1.5rem;
+    }
+
+    .gold-frame-corner :global(div) {
+      width: 50px !important;
+      height: 50px !important;
+    }
+  }
+</style>

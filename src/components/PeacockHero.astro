@@ -1,0 +1,116 @@
+---
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="hero" class="hero">
+  <img src="/illustrations/peacock-hero.png" alt="" class="hero-bg" aria-hidden="true" />
+  <div class="hero-overlay" />
+  <div class="hero-content">
+    <p class="hero-welcome">{t(lang, 'hero.welcome')}</p>
+    <h1 class="hero-names">{t(lang, 'hero.names')}</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-date">{t(lang, 'hero.date')}</p>
+    <p class="hero-tagline">{t(lang, 'hero.tagline')}</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-cream);
+    padding: 4rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 58, 58, 0.4) 0%,
+      rgba(26, 58, 58, 0.6) 50%,
+      rgba(26, 58, 58, 0.7) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-welcome {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    color: var(--color-gold-light);
+  }
+
+  .hero-names {
+    font-size: 4rem;
+    font-family: var(--font-script);
+    color: var(--color-warm-white);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-rule {
+    width: 80px;
+    height: 2px;
+    background: var(--color-gold);
+    margin: 0 auto 1rem;
+  }
+
+  .hero-date {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--color-gold-light);
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.85;
+    color: var(--color-cream);
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      min-height: 80vh;
+      padding: 3rem 1rem;
+    }
+
+    .hero-names {
+      font-size: 2.8rem;
+    }
+
+    .hero-date {
+      font-size: 1.1rem;
+    }
+  }
+</style>
