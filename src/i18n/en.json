@@ -38,5 +38,15 @@
   "schedule.party.description": "Dancing and celebration",
   "rsvp.title": "RSVP",
   "rsvp.message": "RSVP form coming soon! Please check back later.",
-  "footer.message": "We can't wait to celebrate with you!"
+  "footer.message": "We can't wait to celebrate with you!",
+  "nav.ourstory": "Our Story",
+  "ourstory.title": "Our Story",
+  "ourstory.milestone1.title": "The First Meeting",
+  "ourstory.milestone1.description": "Two strangers, one shared moment",
+  "ourstory.milestone2.title": "Park Walk",
+  "ourstory.milestone2.description": "Where conversations never ended",
+  "ourstory.milestone3.title": "City Adventures",
+  "ourstory.milestone3.description": "Exploring the world together",
+  "ourstory.milestone4.title": "Together Since",
+  "ourstory.milestone4.date": "26.09.05"
 }

@@ -1,6 +1,7 @@
 ---
 import { t } from '../i18n/utils';
-import FloralDivider from './motifs/FloralDivider.astro';
+import GoldFrame from './GoldFrame.astro';
+import LotusVineBorder from './motifs/LotusVineBorder.astro';
 
 interface Props {
   lang: string;
@@ -9,21 +10,24 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section class="section welcome reveal">
-  <h2 class="section-title">{t(lang, 'welcome.title')}</h2>
-  <div class="welcome-divider">
-    <FloralDivider width="160px" />
-  </div>
-  <div class="welcome-letter">
-    <p class="welcome-body">{t(lang, 'welcome.body')}</p>
-    <p class="welcome-signature">{t(lang, 'welcome.signature')}</p>
-  </div>
+<section class="welcome reveal">
+  <GoldFrame>
+    <h2 class="section-title">{t(lang, 'welcome.title')}</h2>
+    <div class="welcome-divider">
+      <LotusVineBorder width="200px" />
+    </div>
+    <div class="welcome-illustration">
+      <img src="/illustrations/couple-eating.png" alt="Priya and Tim sharing a meal" loading="lazy" />
+    </div>
+    <div class="welcome-letter">
+      <p class="welcome-body">{t(lang, 'welcome.body')}</p>
+      <p class="welcome-signature">{t(lang, 'welcome.signature')}</p>
+    </div>
+  </GoldFrame>
 </section>
 
 <style>
   .welcome {
-    background-color: var(--color-white);
-    max-width: 100%;
     padding: var(--section-padding);
     position: relative;
   }
@@ -37,6 +41,20 @@ const { lang } = Astro.props;
     margin-bottom: 2rem;
   }
 
+  .welcome-illustration {
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(200, 150, 62, 0.3);
+  }
+
+  .welcome-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .welcome-letter {
     max-width: 600px;
     margin: 0 auto;
@@ -46,13 +64,13 @@ const { lang } = Astro.props;
   .welcome-body {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: var(--color-text);
+    color: var(--color-cream);
     margin-bottom: 1.5rem;
   }
 
   .welcome-signature {
     font-family: var(--font-script);
     font-size: 1.8rem;
-    color: var(--color-teal);
+    color: var(--color-gold-light);
   }
 </style>
