@@ -25,12 +25,93 @@ const { lang } = Astro.props;
       <LotusVineBorder width="200px" />
     </div>
 
-    <div class="rsvp-medallion">
-      <img src="/illustrations/lotus-medallion.png" alt="Decorative lotus medallion" loading="lazy" />
-    </div>
+    <form id="rsvp-form" class="rsvp-form" data-lang={lang}>
+      <div class="form-group">
+        <label for="rsvp-name">{t(lang, "rsvp.name")}</label>
+        <input type="text" id="rsvp-name" name="name" required />
+      </div>
 
-    <div class="rsvp-placeholder">
-      <p>{t(lang, "rsvp.message")}</p>
+      <div class="form-group">
+        <label for="rsvp-email">{t(lang, "rsvp.email")}</label>
+        <input type="email" id="rsvp-email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>{t(lang, "rsvp.attending")}</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="attending" value="yes" required />
+            <span>{t(lang, "rsvp.attending.yes")}</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="attending" value="no" required />
+            <span>{t(lang, "rsvp.attending.no")}</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="attending-fields" class="conditional-fields" hidden>
+        <div class="form-group">
+          <label for="rsvp-guests">{t(lang, "rsvp.guestCount")}</label>
+          <input type="number" id="rsvp-guests" name="guestCount" min="1" max="10" value="1" />
+        </div>
+
+        <div class="form-group">
+          <label>{t(lang, "rsvp.events")}</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="events" value="haldi" />
+              <span>{t(lang, "rsvp.events.haldi")}</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="events" value="wedding" />
+              <span>{t(lang, "rsvp.events.wedding")}</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rsvp-dietary">{t(lang, "rsvp.dietary")}</label>
+          <textarea id="rsvp-dietary" name="dietary" rows="2" placeholder={t(lang, "rsvp.dietary.placeholder")}></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>{t(lang, "rsvp.lodging")}</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="lodging" value="yes" />
+              <span>{t(lang, "rsvp.lodging.yes")}</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="lodging" value="no" />
+              <span>{t(lang, "rsvp.lodging.no")}</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="lodging-fields" class="conditional-fields" hidden>
+          <div class="room-row">
+            <div class="form-group">
+              <label for="rsvp-single">{t(lang, "rsvp.singleRooms")}</label>
+              <input type="number" id="rsvp-single" name="singleRooms" min="0" max="5" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="rsvp-double">{t(lang, "rsvp.doubleRooms")}</label>
+              <input type="number" id="rsvp-double" name="doubleRooms" min="0" max="5" value="0" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-errors" id="form-errors" hidden></div>
+
+      <button type="submit" class="rsvp-submit" id="rsvp-submit">
+        {t(lang, "rsvp.submit")}
+      </button>
+    </form>
+
+    <div id="rsvp-success" class="rsvp-success" hidden>
+      <p id="rsvp-success-message"></p>
     </div>
   </GoldFrame>
 </section>
@@ -61,26 +142,137 @@ const { lang } = Astro.props;
     margin-bottom: 2rem;
   }
 
-  .rsvp-medallion {
-    max-width: 200px;
-    margin: 0 auto 2rem;
-  }
-
-  .rsvp-medallion img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .rsvp-placeholder {
-    max-width: var(--max-width);
+  .rsvp-form {
+    max-width: 500px;
     margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-gold-light);
+    font-weight: 500;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(200, 150, 62, 0.4);
+    border-radius: 6px;
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(200, 150, 62, 0.2);
+  }
+
+  .form-group input[type="number"] {
+    max-width: 120px;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .radio-label,
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--color-cream);
+  }
+
+  .radio-label input,
+  .checkbox-label input {
+    accent-color: var(--color-gold);
+  }
+
+  .room-row {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .conditional-fields {
+    transition: opacity 0.2s;
+  }
+
+  .conditional-fields[hidden] {
+    display: none;
+  }
+
+  .form-errors {
+    background: rgba(139, 45, 45, 0.3);
+    border: 1px solid rgba(139, 45, 45, 0.6);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: #f0a0a0;
+    font-size: 0.9rem;
+  }
+
+  .form-errors[hidden] {
+    display: none;
+  }
+
+  .form-errors ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .rsvp-submit {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 2rem;
+    background-color: var(--color-gold);
+    color: var(--color-base-dark);
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: var(--font-body);
+  }
+
+  .rsvp-submit:hover {
+    background-color: var(--color-gold-light);
+  }
+
+  .rsvp-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .rsvp-success {
     text-align: center;
     padding: 3rem 2rem;
-    border: 2px dashed var(--color-gold);
-    border-radius: 12px;
     color: var(--color-cream);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+  }
+
+  .rsvp-success[hidden] {
+    display: none;
   }
 
   @media (max-width: 600px) {
@@ -88,5 +280,112 @@ const { lang } = Astro.props;
     .rsvp-motif-right {
       display: none;
     }
+
+    .room-row {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 </style>
+
+<script>
+  const form = document.getElementById('rsvp-form') as HTMLFormElement;
+  const attendingFields = document.getElementById('attending-fields')!;
+  const lodgingFields = document.getElementById('lodging-fields')!;
+  const errorsDiv = document.getElementById('form-errors')!;
+  const submitBtn = document.getElementById('rsvp-submit') as HTMLButtonElement;
+  const successDiv = document.getElementById('rsvp-success')!;
+  const successMsg = document.getElementById('rsvp-success-message')!;
+
+  form.querySelectorAll('input[name="attending"]').forEach((radio) => {
+    radio.addEventListener('change', (e) => {
+      const val = (e.target as HTMLInputElement).value;
+      attendingFields.hidden = val !== 'yes';
+    });
+  });
+
+  form.querySelectorAll('input[name="lodging"]').forEach((radio) => {
+    radio.addEventListener('change', (e) => {
+      const val = (e.target as HTMLInputElement).value;
+      lodgingFields.hidden = val !== 'yes';
+    });
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorsDiv.hidden = true;
+
+    const formData = new FormData(form);
+    const attending = formData.get('attending') === 'yes';
+
+    const body: Record<string, unknown> = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      attending,
+    };
+
+    if (attending) {
+      body.guestCount = Number(formData.get('guestCount')) || 1;
+      body.events = formData.getAll('events');
+      body.dietary = formData.get('dietary') || '';
+      body.lodging = formData.get('lodging') === 'yes';
+
+      if (body.lodging) {
+        body.singleRooms = Number(formData.get('singleRooms')) || 0;
+        body.doubleRooms = Number(formData.get('doubleRooms')) || 0;
+      }
+    }
+
+    submitBtn.disabled = true;
+    const originalText = submitBtn.textContent;
+    const lang = form.dataset.lang || 'en';
+    const submittingText: Record<string, string> = {
+      en: 'Sending...', sv: 'Skickar...', hi: 'भेजा जा रहा है...'
+    };
+    submitBtn.textContent = submittingText[lang] || submittingText.en;
+
+    try {
+      const res = await fetch('/api/rsvp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorsDiv.innerHTML = '<ul>' + data.errors.map((e: string) => `<li>${e}</li>`).join('') + '</ul>';
+        errorsDiv.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      form.hidden = true;
+
+      const messages: Record<string, Record<string, string>> = {
+        en: {
+          attending: "Thank you! We can't wait to celebrate with you!",
+          declining: "We'll miss you! Thank you for letting us know.",
+        },
+        sv: {
+          attending: 'Tack! Vi kan inte vänta med att fira med dig!',
+          declining: 'Vi kommer att sakna dig! Tack för att du meddelade oss.',
+        },
+        hi: {
+          attending: 'धन्यवाद! हम आपके साथ जश्न मनाने के लिए बेसब्र हैं!',
+          declining: 'हम आपकी कमी महसूस करेंगे! बताने के लिए धन्यवाद।',
+        },
+      };
+
+      const msgSet = messages[lang] || messages.en;
+      successMsg.textContent = attending ? msgSet.attending : msgSet.declining;
+      successDiv.hidden = false;
+    } catch {
+      errorsDiv.innerHTML = '<ul><li>Something went wrong. Please try again.</li></ul>';
+      errorsDiv.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+</script>
