@@ -4,7 +4,7 @@ const COOKIE_NAME = 'admin_session';
 const TOKEN_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 function getSecret(): string {
-  const secret = process.env.ADMIN_PASSWORD;
+  const secret = import.meta.env.ADMIN_PASSWORD;
   if (!secret) throw new Error('ADMIN_PASSWORD env var is not set');
   return secret;
 }
