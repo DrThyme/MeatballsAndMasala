@@ -10,13 +10,10 @@ function getSecret(): string {
 }
 
 export function checkPassword(input: string): boolean {
-  const expected = getSecret();
-  if (input.length !== expected.length) return false;
-  try {
-    return timingSafeEqual(Buffer.from(input), Buffer.from(expected));
-  } catch {
-    return false;
-  }
+  const secret = getSecret();
+  const inputHash = createHmac('sha256', 'pw-check').update(input).digest();
+  const expectedHash = createHmac('sha256', 'pw-check').update(secret).digest();
+  return timingSafeEqual(inputHash, expectedHash);
 }
 
 export function createToken(): string {
@@ -48,9 +45,9 @@ export function isAuthenticated(cookieHeader: string | null): boolean {
 }
 
 export function sessionCookie(token: string): string {
-  return `${COOKIE_NAME}=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=86400`;
+  return `${COOKIE_NAME}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400`;
 }
 
 export function clearCookie(): string {
-  return `${COOKIE_NAME}=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0`;
+  return `${COOKIE_NAME}=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0`;
 }
