@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PeacockHero from '../../components/PeacockHero.astro';
-import OurStory from '../../components/OurStory.astro';
 import IllustratedScene from '../../components/IllustratedScene.astro';
 import Welcome from '../../components/Welcome.astro';
 import StoryVenue from '../../components/StoryVenue.astro';
@@ -13,12 +12,10 @@ const lang = 'hi';
 
 <BaseLayout lang={lang}>
   <PeacockHero lang={lang} />
-  <OurStory lang={lang} />
-  <IllustratedScene image="/illustrations/swedish-archipelago.png" caption="From the land of midnight sun" alt="Swedish red cottages by the sea" />
   <Welcome lang={lang} />
-  <IllustratedScene image="/illustrations/himalayan-peaks.png" caption="To the peaks of the Himalayas" alt="Snow-capped Himalayan mountains" />
+  <IllustratedScene image="/illustrations/swedish-nature.jpg" caption="From the land of the midnight sun..." alt="Swedish waterfall with rainbow" />
   <StoryVenue lang={lang} />
-  <IllustratedScene image="/illustrations/swedish-meadow.png" caption="Where wildflowers dance" alt="Swedish meadow with bluebells and strawberries" />
+  <IllustratedScene image="/illustrations/himalayan-road.jpg" caption="...to the peaks of the Himalayas" alt="Mountain road through the Himalayas" />
   <Schedule lang={lang} />
   <IllustratedScene image="/illustrations/holding-hands.png" caption="Two hands, one journey" alt="Couple holding hands with mehndi designs" />
   <Rsvp lang={lang} />

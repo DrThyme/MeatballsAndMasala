@@ -1,6 +1,5 @@
 ---
 import { t } from "../i18n/utils";
-import LotusCorner from "./motifs/LotusCorner.astro";
 import LotusVineBorder from "./motifs/LotusVineBorder.astro";
 import GoldFrame from "./GoldFrame.astro";
 
@@ -13,13 +12,6 @@ const { lang } = Astro.props;
 
 <section id="rsvp" class="rsvp reveal">
   <GoldFrame>
-    <div class="rsvp-motif-left">
-      <LotusCorner size="100px" color="var(--color-gold)" opacity={0.18} />
-    </div>
-    <div class="rsvp-motif-right">
-      <LotusCorner size="100px" color="var(--color-gold)" opacity={0.18} flip />
-    </div>
-
     <h2 class="section-title">{t(lang, "rsvp.title")}</h2>
     <div class="rsvp-divider">
       <LotusVineBorder width="200px" />
@@ -120,20 +112,6 @@ const { lang } = Astro.props;
   .rsvp {
     padding: var(--section-padding);
     position: relative;
-  }
-
-  .rsvp-motif-left {
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    pointer-events: none;
-  }
-
-  .rsvp-motif-right {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    pointer-events: none;
   }
 
   .rsvp-divider {
@@ -276,11 +254,6 @@ const { lang } = Astro.props;
   }
 
   @media (max-width: 600px) {
-    .rsvp-motif-left,
-    .rsvp-motif-right {
-      display: none;
-    }
-
     .room-row {
       flex-direction: column;
       gap: 0;

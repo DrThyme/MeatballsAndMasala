@@ -1,27 +1,30 @@
 ---
-import LotusCorner from './motifs/LotusCorner.astro';
+import LotusCorner from "./motifs/LotusCorner.astro";
 
 interface Props {
   class?: string;
   padding?: string;
 }
 
-const { class: className = '', padding = '3rem' } = Astro.props;
+const { class: className = "", padding = "3rem" } = Astro.props;
 ---
 
-<div class:list={['gold-frame', className]} style={`--frame-padding: ${padding};`}>
+<div
+  class:list={["gold-frame", className]}
+  style={`--frame-padding: ${padding};`}
+>
   <div class="gold-frame-border">
     <div class="gold-frame-corner top-left">
       <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} />
     </div>
     <div class="gold-frame-corner top-right">
-      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} flip />
+      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} />
     </div>
     <div class="gold-frame-corner bottom-left">
       <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} />
     </div>
     <div class="gold-frame-corner bottom-right">
-      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} flip />
+      <LotusCorner size="80px" color="var(--color-gold)" opacity={0.6} />
     </div>
   </div>
   <div class="gold-frame-content">
@@ -33,6 +36,8 @@ const { class: className = '', padding = '3rem' } = Astro.props;
   .gold-frame {
     position: relative;
     padding: var(--frame-padding);
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
 
   .gold-frame-border {
@@ -45,7 +50,7 @@ const { class: className = '', padding = '3rem' } = Astro.props;
   }
 
   .gold-frame-border::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -62,8 +67,13 @@ const { class: className = '', padding = '3rem' } = Astro.props;
   }
 
   @keyframes shimmer {
-    0%, 100% { left: -100%; }
-    50% { left: 100%; }
+    0%,
+    100% {
+      left: -100%;
+    }
+    50% {
+      left: 100%;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

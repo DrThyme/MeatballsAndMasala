@@ -17,22 +17,48 @@ const { lang } = Astro.props;
       <LotusVineBorder width="200px" />
     </div>
 
-    <div class="venue-map">
-      <img src="/illustrations/venue-map.png" alt="Illustrated map of Wiks Slott" loading="lazy" />
+    <div class="venue-block">
+      <div class="venue-map">
+        <img src="/illustrations/haldi-mehendi-venue.png" alt="Illustrated map of the Haldi & Mehendi venue" loading="lazy" />
+      </div>
+
+      <div class="venue-details">
+        <h3 class="venue-name">{t(lang, 'venue.haldi.name')}</h3>
+        <p class="venue-address">{t(lang, 'venue.haldi.address')}</p>
+        <p class="venue-description">{t(lang, 'venue.haldi.description')}</p>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Sandbrov%C3%A4gen+70,+743+74+Bj%C3%B6rklinge"
+          class="venue-directions"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t(lang, 'venue.haldi.directions')} &rarr;
+        </a>
+      </div>
     </div>
 
-    <div class="venue-details">
-      <h3 class="venue-name">{t(lang, 'venue.name')}</h3>
-      <p class="venue-address">{t(lang, 'venue.address')}</p>
-      <p class="venue-description">{t(lang, 'venue.description')}</p>
-      <a
-        href="https://www.google.com/maps/place/Wiks+Slott,+Uppsala,+Sweden"
-        class="venue-directions"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t(lang, 'venue.directions')} &rarr;
-      </a>
+    <div class="venue-separator">
+      <LotusVineBorder width="200px" />
+    </div>
+
+    <div class="venue-block">
+      <div class="venue-map">
+        <img src="/illustrations/venue-map.png" alt="Illustrated map of Wiks Slott" loading="lazy" />
+      </div>
+
+      <div class="venue-details">
+        <h3 class="venue-name">{t(lang, 'venue.name')}</h3>
+        <p class="venue-address">{t(lang, 'venue.address')}</p>
+        <p class="venue-description">{t(lang, 'venue.description')}</p>
+        <a
+          href="https://www.google.com/maps/place/Wiks+Slott,+Uppsala,+Sweden"
+          class="venue-directions"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t(lang, 'venue.directions')} &rarr;
+        </a>
+      </div>
     </div>
   </GoldFrame>
 </section>
@@ -50,6 +76,11 @@ const { lang } = Astro.props;
   .venue-divider {
     text-align: center;
     margin-bottom: 2rem;
+  }
+
+  .venue-separator {
+    text-align: center;
+    margin: 2.5rem 0;
   }
 
   .venue-map {
