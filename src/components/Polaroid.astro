@@ -1,0 +1,97 @@
+---
+interface Props {
+  caption?: string;
+  rotation?: number;
+  placeholderColor?: string;
+  hoverX?: string;
+  hoverY?: string;
+  debugNum?: number;
+  class?: string;
+}
+
+const {
+  caption,
+  rotation = 0,
+  placeholderColor = 'var(--color-teal)',
+  hoverX = '0px',
+  hoverY = '-40px',
+  debugNum,
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class={`polaroid ${className}`}
+  style={`--rotation: ${rotation}deg; --hover-x: ${hoverX}; --hover-y: ${hoverY};`}
+>
+  {debugNum !== undefined && <span class="polaroid-debug">{debugNum}</span>}
+  <div class="polaroid-image" style={`background: linear-gradient(135deg, ${placeholderColor}, var(--color-gold-light));`}>
+    <slot />
+  </div>
+  {caption && <p class="polaroid-caption">{caption}</p>}
+</div>
+
+<style>
+  .polaroid {
+    background: var(--color-ivory);
+    padding: 8px 8px 28px;
+    box-shadow: var(--shadow-card);
+    transform: rotate(var(--rotation));
+    transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
+    width: fit-content;
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .polaroid:hover {
+    transform: rotate(0deg) translate(var(--hover-x, 0px), var(--hover-y, -40px));
+    box-shadow: var(--shadow-card-hover);
+    z-index: 10;
+  }
+
+  .polaroid-image {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+  }
+
+  .polaroid-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .polaroid-debug {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    width: 28px;
+    height: 28px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: var(--font-body);
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .polaroid-caption {
+    font-family: var(--font-handwritten);
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .polaroid {
+      display: none;
+    }
+  }
+</style>

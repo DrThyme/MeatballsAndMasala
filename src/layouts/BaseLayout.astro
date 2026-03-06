@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import LotusVineBorder from '../components/motifs/LotusVineBorder.astro';
+import FallingLeaves from '../components/FallingLeaves.astro';
 import { t } from '../i18n/utils';
 
 interface Props {
@@ -19,6 +21,7 @@ const { lang } = Astro.props;
     <meta name="description" content={t(lang, 'hero.tagline')} />
   </head>
   <body>
+    <FallingLeaves count={6} />
     <header class="site-header">
       <nav class="site-nav">
         <div class="nav-links">
@@ -36,6 +39,9 @@ const { lang } = Astro.props;
     </main>
 
     <footer class="site-footer">
+      <div class="footer-border">
+        <LotusVineBorder width="250px" color="var(--color-gold-light)" opacity={0.4} />
+      </div>
       <p>{t(lang, 'footer.message')}</p>
     </footer>
   </body>
@@ -77,10 +83,14 @@ const { lang } = Astro.props;
   .site-footer {
     text-align: center;
     padding: 2rem 1.5rem;
-    background-color: var(--color-teal-dark);
+    background-color: rgba(15, 30, 30, 0.8);
     color: var(--color-cream);
     font-family: var(--font-heading);
     font-size: 1.1rem;
+  }
+
+  .footer-border {
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 600px) {
@@ -91,5 +101,22 @@ const { lang } = Astro.props;
     .nav-links a {
       font-size: 0.8rem;
     }
+
   }
 </style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>

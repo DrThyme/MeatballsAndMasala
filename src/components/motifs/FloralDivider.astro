@@ -1,0 +1,37 @@
+---
+interface Props {
+  width?: string;
+  color?: string;
+  opacity?: number;
+}
+
+const { width = '200px', color = 'var(--color-gold)', opacity = 0.35 } = Astro.props;
+---
+
+<svg
+  width={width}
+  height="30"
+  viewBox="0 0 200 30"
+  fill="none"
+  style={`opacity: ${opacity};`}
+  aria-hidden="true"
+>
+  <!-- Center flower -->
+  <circle cx="100" cy="15" r="4" fill={color} />
+  <ellipse cx="100" cy="8" rx="3" ry="6" stroke={color} stroke-width="0.75" fill="none" />
+  <ellipse cx="100" cy="22" rx="3" ry="6" stroke={color} stroke-width="0.75" fill="none" />
+  <ellipse cx="93" cy="15" rx="6" ry="3" stroke={color} stroke-width="0.75" fill="none" />
+  <ellipse cx="107" cy="15" rx="6" ry="3" stroke={color} stroke-width="0.75" fill="none" />
+
+  <!-- Left vine -->
+  <path d="M85 15 Q70 10 55 15 Q40 20 25 15 Q15 12 5 15" stroke={color} stroke-width="0.75" fill="none" />
+  <!-- Left leaves -->
+  <path d="M70 12 Q65 5 60 12" stroke={color} stroke-width="0.5" fill="none" />
+  <path d="M45 18 Q40 25 35 18" stroke={color} stroke-width="0.5" fill="none" />
+
+  <!-- Right vine -->
+  <path d="M115 15 Q130 20 145 15 Q160 10 175 15 Q185 18 195 15" stroke={color} stroke-width="0.75" fill="none" />
+  <!-- Right leaves -->
+  <path d="M130 18 Q135 25 140 18" stroke={color} stroke-width="0.5" fill="none" />
+  <path d="M155 12 Q160 5 165 12" stroke={color} stroke-width="0.5" fill="none" />
+</svg>

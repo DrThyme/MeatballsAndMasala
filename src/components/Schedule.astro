@@ -1,5 +1,7 @@
 ---
-import { t } from '../i18n/utils';
+import { t } from "../i18n/utils";
+import LotusVineBorder from "./motifs/LotusVineBorder.astro";
+import GoldFrame from "./GoldFrame.astro";
 
 interface Props {
   lang: string;
@@ -7,47 +9,103 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const day1Events = ['mehendi'];
-const day2Events = ['ceremony', 'dinner', 'party'];
+const day1Events = ["mehendi"];
+const day2Events = ["ceremony", "dinner", "party"];
+const eventsWithDetails = ["mehendi", "ceremony"];
 ---
 
-<section id="schedule" class="section schedule">
-  <h2 class="section-title">{t(lang, 'schedule.title')}</h2>
-
-  <div class="timeline">
-    <div class="day-header">
-      <span class="day-date">{t(lang, 'schedule.day1.date')}</span>
-      <span class="day-title">{t(lang, 'schedule.day1.title')}</span>
+<section id="schedule" class="schedule reveal">
+  <GoldFrame>
+    <h2 class="section-title">{t(lang, "schedule.title")}</h2>
+    <div class="schedule-divider">
+      <LotusVineBorder width="200px" />
     </div>
-    {day1Events.map((event) => (
-      <div class="timeline-item">
-        <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
-        <div class="timeline-dot" />
-        <div class="timeline-content">
-          <h3>{t(lang, `schedule.${event}.title`)}</h3>
-          <p>{t(lang, `schedule.${event}.description`)}</p>
-        </div>
-      </div>
-    ))}
 
-    <div class="day-header">
-      <span class="day-date">{t(lang, 'schedule.day2.date')}</span>
-      <span class="day-title">{t(lang, 'schedule.day2.title')}</span>
+    <div class="schedule-illustration">
+      <img src="/illustrations/couple-traditional.png" alt="Priya and Tim in traditional dress" loading="lazy" />
     </div>
-    {day2Events.map((event) => (
-      <div class="timeline-item">
-        <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
-        <div class="timeline-dot" />
-        <div class="timeline-content">
-          <h3>{t(lang, `schedule.${event}.title`)}</h3>
-          <p>{t(lang, `schedule.${event}.description`)}</p>
-        </div>
+
+    <div class="timeline">
+      <div class="day-header">
+        <span class="day-date">{t(lang, "schedule.day1.date")}</span>
+        <span class="day-title">{t(lang, "schedule.day1.title")}</span>
       </div>
-    ))}
-  </div>
+      {
+        day1Events.map((event) => (
+          <div class="timeline-item">
+            <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
+            <div class="timeline-dot" />
+            <div class="timeline-content">
+              <h3>{t(lang, `schedule.${event}.title`)}</h3>
+              <p>{t(lang, `schedule.${event}.description`)}</p>
+              {eventsWithDetails.includes(event) && (
+                <details class="event-details">
+                  <summary>{t(lang, `schedule.${event}.learnMore`)}</summary>
+                  <p class="event-explanation">
+                    {t(lang, `schedule.${event}.explanation`)}
+                  </p>
+                </details>
+              )}
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="day-header">
+        <span class="day-date">{t(lang, "schedule.day2.date")}</span>
+        <span class="day-title">{t(lang, "schedule.day2.title")}</span>
+      </div>
+      {
+        day2Events.map((event) => (
+          <div class="timeline-item">
+            <div class="timeline-time">{t(lang, `schedule.${event}.time`)}</div>
+            <div class="timeline-dot" />
+            <div class="timeline-content">
+              <h3>{t(lang, `schedule.${event}.title`)}</h3>
+              <p>{t(lang, `schedule.${event}.description`)}</p>
+              {eventsWithDetails.includes(event) && (
+                <details class="event-details">
+                  <summary>{t(lang, `schedule.${event}.learnMore`)}</summary>
+                  <p class="event-explanation">
+                    {t(lang, `schedule.${event}.explanation`)}
+                  </p>
+                </details>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </GoldFrame>
 </section>
 
 <style>
+  .schedule {
+    padding: var(--section-padding);
+    position: relative;
+    z-index: 2;
+  }
+
+  .schedule-divider {
+    text-align: center;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+
+  .schedule-illustration {
+    max-width: 350px;
+    margin: 0 auto 2rem;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(200, 150, 62, 0.3);
+  }
+
+  .schedule-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .timeline {
     max-width: 500px;
     margin: 0 auto;
@@ -55,7 +113,7 @@ const day2Events = ['ceremony', 'dinner', 'party'];
   }
 
   .timeline::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 80px;
     top: 0;
@@ -73,12 +131,13 @@ const day2Events = ['ceremony', 'dinner', 'party'];
     margin-top: 2rem;
     position: relative;
     z-index: 1;
-    background-color: var(--color-cream);
+    background-color: rgba(42, 75, 75, 0.8);
     padding: 0.5rem 1rem;
     max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
     border-radius: 8px;
+    border: 1px solid rgba(200, 150, 62, 0.2);
   }
 
   .day-header:first-child {
@@ -87,14 +146,15 @@ const day2Events = ['ceremony', 'dinner', 'party'];
 
   .day-date {
     font-size: 0.9rem;
-    color: var(--color-text-light);
+    color: var(--color-cream);
     font-weight: 500;
+    opacity: 0.8;
   }
 
   .day-title {
     font-family: var(--font-heading);
     font-size: 1.3rem;
-    color: var(--color-teal-dark);
+    color: var(--color-gold-light);
     font-weight: 600;
   }
 
@@ -111,7 +171,7 @@ const day2Events = ['ceremony', 'dinner', 'party'];
     width: 65px;
     text-align: right;
     font-weight: 600;
-    color: var(--color-teal);
+    color: var(--color-gold);
     padding-top: 0.15rem;
   }
 
@@ -121,7 +181,7 @@ const day2Events = ['ceremony', 'dinner', 'party'];
     height: 12px;
     border-radius: 50%;
     background-color: var(--color-gold);
-    border: 2px solid var(--color-cream);
+    border: 2px solid var(--color-base-dark);
     margin-top: 0.35rem;
     z-index: 1;
   }
@@ -129,12 +189,54 @@ const day2Events = ['ceremony', 'dinner', 'party'];
   .timeline-content h3 {
     font-size: 1.15rem;
     margin-bottom: 0.25rem;
-    color: var(--color-teal-dark);
+    color: var(--color-gold-light);
   }
 
   .timeline-content p {
-    color: var(--color-text-light);
+    color: var(--color-cream);
     font-size: 0.95rem;
+    opacity: 0.8;
+  }
+
+  .event-details {
+    margin-top: 0.5rem;
+  }
+
+  .event-details summary {
+    font-family: var(--font-handwritten);
+    font-size: 1rem;
+    color: var(--color-gold);
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .event-details summary::before {
+    content: "▸";
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .event-details[open] summary::before {
+    transform: rotate(90deg);
+  }
+
+  .event-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .event-explanation {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(42, 75, 75, 0.5);
+    border-left: 3px solid var(--color-gold);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-cream);
   }
 
   @media (max-width: 600px) {

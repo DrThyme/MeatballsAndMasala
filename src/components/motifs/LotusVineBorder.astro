@@ -1,0 +1,59 @@
+---
+interface Props {
+  width?: string;
+  color?: string;
+  opacity?: number;
+}
+
+const { width = '200px', color = 'var(--color-gold)', opacity = 0.5 } = Astro.props;
+---
+
+<div class="lotus-vine-border" style={`width: ${width}; opacity: ${opacity};`}>
+  <svg viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Left vine -->
+    <path d="M10 20 Q30 15 50 18 Q70 20 90 16 Q110 12 130 18 Q140 20 148 20" stroke={color} stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+    <!-- Right vine (mirrored) -->
+    <path d="M290 20 Q270 15 250 18 Q230 20 210 16 Q190 12 170 18 Q160 20 152 20" stroke={color} stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+    <!-- Center lotus -->
+    <path d="M150 12 Q153 5 156 12 Q153 14 150 12Z" fill={color}/>
+    <path d="M144 16 Q140 10 148 14 Q146 17 144 16Z" fill={color}/>
+    <path d="M156 16 Q160 10 152 14 Q154 17 156 16Z" fill={color}/>
+    <path d="M150 20 Q147 14 150 12 Q153 14 150 20Z" fill={color} opacity="0.8"/>
+    <circle cx="150" cy="15" r="2" fill={color}/>
+
+    <!-- Left leaves -->
+    <path d="M50 18 Q55 10 58 17 Q55 19 50 18Z" fill={color} opacity="0.6"/>
+    <path d="M90 16 Q85 22 88 16 Q90 14 90 16Z" fill={color} opacity="0.5"/>
+    <path d="M120 16 Q125 10 124 17 Q122 18 120 16Z" fill={color} opacity="0.6"/>
+
+    <!-- Right leaves (mirrored) -->
+    <path d="M250 18 Q245 10 242 17 Q245 19 250 18Z" fill={color} opacity="0.6"/>
+    <path d="M210 16 Q215 22 212 16 Q210 14 210 16Z" fill={color} opacity="0.5"/>
+    <path d="M180 16 Q175 10 176 17 Q178 18 180 16Z" fill={color} opacity="0.6"/>
+
+    <!-- Decorative dots -->
+    <circle cx="30" cy="18" r="1.2" fill={color} opacity="0.4"/>
+    <circle cx="70" cy="19" r="1" fill={color} opacity="0.3"/>
+    <circle cx="230" cy="19" r="1" fill={color} opacity="0.3"/>
+    <circle cx="270" cy="18" r="1.2" fill={color} opacity="0.4"/>
+
+    <!-- End flourishes -->
+    <path d="M10 20 Q5 16 8 14" stroke={color} stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M290 20 Q295 16 292 14" stroke={color} stroke-width="1" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<style>
+  .lotus-vine-border {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 0;
+  }
+
+  .lotus-vine-border svg {
+    width: 100%;
+    height: auto;
+  }
+</style>

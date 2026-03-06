@@ -1,0 +1,52 @@
+---
+interface Props {
+  size?: string;
+  color?: string;
+  opacity?: number;
+  flip?: boolean;
+}
+
+const { size = '120px', color = 'var(--color-gold)', opacity = 0.2, flip = false } = Astro.props;
+const transform = flip ? 'scaleX(-1)' : '';
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 120 120"
+  fill="none"
+  style={`opacity: ${opacity}; transform: ${transform};`}
+  aria-hidden="true"
+>
+  <!-- Paisley shape -->
+  <path
+    d="M10 110 Q10 60 40 35 Q55 22 70 30 Q85 38 80 55 Q75 72 55 75 Q35 78 30 60"
+    stroke={color}
+    stroke-width="1.5"
+    fill="none"
+  />
+  <!-- Inner spiral -->
+  <path
+    d="M45 55 Q50 45 60 48 Q70 51 65 60 Q60 69 50 65"
+    stroke={color}
+    stroke-width="1"
+    fill="none"
+  />
+  <!-- Dots -->
+  <circle cx="38" cy="42" r="2" fill={color} />
+  <circle cx="72" cy="42" r="2" fill={color} />
+  <circle cx="55" cy="82" r="2" fill={color} />
+  <!-- Leaf flourishes -->
+  <path
+    d="M25 90 Q15 80 25 70"
+    stroke={color}
+    stroke-width="1"
+    fill="none"
+  />
+  <path
+    d="M20 95 Q10 85 20 75"
+    stroke={color}
+    stroke-width="1"
+    fill="none"
+  />
+</svg>
